@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Setup eduroam with easyroam on unsupported linux devices. 
+# Developed by https://github.com/jahtz
+
+# easyroam: https://www.easyroam.de/
+# DFN: https://www.dfn.de/
+
 # Generate a random certificate password
 pkpw=$(tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 15)
 
