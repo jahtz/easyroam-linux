@@ -20,16 +20,11 @@ check_dependency() {
 
 ### DEFAULT VALUES
 pkpw=$(tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 15)  # Generate a random certificate password
-outputdir="/etc/NetworkManager/certs/"  # default output directory
+homedir=$( getent passwd "$USER" | cut -d: -f6 )  # users home directory
+outputdir="$homedir/Documents/easyroam/"  # default output directory
 legacy="-legacy"  # legacy option
 
 ### CHECKS ###
-# Check for root privileges
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root."
-    exit 1
-fi
-
 # Check for required dependencies
 echo "Checking dependencies:"
 check_dependency "nmcli"

@@ -32,9 +32,9 @@ Currently, the direct setup has been tested only on Fedora with NetworkManager, 
     ```
     chmod +x easyroam_nm.sh
     ```
-3. Run setup (this script requires root):
+3. Run setup:
     ```
-    sudo  ./easyroam_nm.sh
+    ./easyroam_nm.sh
     ```
 4. If you want to delete the generated config remove `/etc/NetworkManager/system-connections/easyroam.nmconnection` or run:
     ```
