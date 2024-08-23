@@ -104,4 +104,4 @@ fi
 echo "Done"
 
 # Output CN identity:
-echo -e "Identity: $cn"
+echo -e "\nIdentity: $cn"
