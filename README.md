@@ -52,7 +52,7 @@ Currently, the direct setup has been tested only on Fedora with NetworkManager, 
     ```
 3. Run setup:
     ```
-    sudo  ./easyroam_cert.sh
+    ./easyroam_cert.sh
     ```
 4. Follow setup guides:
     - [netctl](https://doku.tid.dfn.de/de:eduroam:easyroam#installation_der_easyroam_profile_auf_linux_geraeten) (e.g. Arch)
