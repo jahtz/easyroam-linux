@@ -36,6 +36,10 @@ Currently, the direct setup has been tested only on Fedora with NetworkManager, 
     ```
     sudo  ./easyroam_nm.sh
     ```
+4. If you want to delete the generated config remove `/etc/NetworkManager/system-connections/easyroam.nmconnection` or run:
+    ```
+    nmcli connection delete easyroam
+    ```
 
 ### Manual extraction
 1. Download the script:
