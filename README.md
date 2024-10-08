@@ -16,44 +16,48 @@ I started following their [guide](https://doku.tid.dfn.de/de:eduroam:easyroam#in
 Currently, the direct setup has been tested only on Fedora with NetworkManager, but I can extend support to other distributions and other network managers if there is interest.
 
 ## Usage
-### Get certificate
+### Step 1: Obtaining certificate
 1. Open https://www.easyroam.de
-2. Search your university and log in.
-3. Go to `Generate profile`.
-4. Select `manual options`, select `PKCS12` and enter your device name.
-5. Download the file by clicking on the `Generate profile`-Button.
+2. Search for your university and log in
+3. Navigate to `Generate profile`
+4. Select `manual options`, choose `PKCS12` and enter your device name
+5. Download the file by clicking on the `Generate profile` button
 
-### Fedora with NetworkManger
-1. Download the script:
-    ```
-    curl -o easyroamlinux.sh https://raw.githubusercontent.com/jahtz/easyroam-linux/main/easyroam_nm.sh
-    ```
-2. Make it executable:
-    ```
-    chmod +x easyroam_nm.sh
-    ```
-3. Run setup:
-    ```
-    ./easyroam_nm.sh
-    ```
-4. If you want to delete the generated config remove _/etc/NetworkManager/system-connections/easyroam.nmconnection_ or run:
-    ```
-    nmcli connection delete easyroam
-    ```
+### Step 2: Download
+- **Network Manager**<br>
+    Install easyroam/eduroam on distributions using NetworkManager
 
-### Manual extraction
-1. Download the script:
+    > [!WARNING]
+    > Tested only on Fedora Workstation 40
+
+    > [!NOTE]
+    > For immutable distributions like Fedora Atomic Desktops, refer to [C-3PK's fork](https://github.com/C-3PK/easyroam-linux)
+
+    > [!TIP]
+    > To remove the generated configuration, delete the file _/etc/NetworkManager/system-connections/easyroam.nmconnection_ <br>or run: `nmcli connection delete easyroam` 
     ```
-    curl -o easyroamlinux.sh https://raw.githubusercontent.com/jahtz/easyroam-linux/main/easyroam_cert.sh
+    curl -o easyroam.sh https://raw.githubusercontent.com/jahtz/easyroam-linux/main/easyroam_nm.sh
     ```
-2. Make it executable:
+- **Manual**<br>
+    This script unpacks the PKCS12 (.p12) file for manual configuration
+    > [!TIP]
+    > After unpacking, you can follow the official DNF guides for:
+    > - [netctl](https://doku.tid.dfn.de/de:eduroam:easyroam#installation_der_easyroam_profile_auf_linux_geraeten) (e.g. Arch)
+    > - [wpa-supplicant](https://doku.tid.dfn.de/de:eduroam:easyroam#installation_der_easyroam_profile_auf_linux_geraeten_ohne_desktop_umgebung_wpa-supplicant_only) (e.g. Pi OS Lite)
     ```
-    chmod +x easyroam_cert.sh
+    curl -o easyroam.sh https://raw.githubusercontent.com/jahtz/easyroam-linux/main/easyroam_cert.sh
     ```
-3. Run setup:
+    Resulting files:
+    - `easyroam_root_ca.pem` &rarr; CA certificate
+    - `easyroam_client_cert.pem` &rarr; User certificate
+    - `easyroam_client_key.pem` &rarr; Private key
+
+### Step 3: Run script
+1. Make the script executable:
     ```
-    ./easyroam_cert.sh
+    chmod +x easyroam.sh
     ```
-4. Follow setup guides:
-    - [netctl](https://doku.tid.dfn.de/de:eduroam:easyroam#installation_der_easyroam_profile_auf_linux_geraeten) (e.g. Arch)
-    - [wpa-supplicant](https://doku.tid.dfn.de/de:eduroam:easyroam#installation_der_easyroam_profile_auf_linux_geraeten_ohne_desktop_umgebung_wpa-supplicant_only) (e.g. Pi OS Lite):<br>
+2. Run the setup:
+    ```
+    ./easyroam.sh
+    ```
