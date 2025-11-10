@@ -21,14 +21,16 @@ Currently, the direct setup has been tested only on Fedora with NetworkManager, 
 
 You can either user `easyroam.sh` to extract the certificate files and set up your network manually, or, if you have NetworkManager installed, use `easyroam_nm.sh` to set up the network automatically.
 
-### Optaining your Certificate
+### Obtaining your Certificate
 
 1. Open https://www.easyroam.de
-2. Search for your university and log in
-3. Navigate to `Generate profile`
-4. Select `manual options`, choose `PKCS12` and enter your device name
-5. Download the file by clicking on the `Generate profile` button
+2. Click log-in and search for your university
+3. Log-in through your university
+4. Select `linux` in `Manual installation`
+6. Enter your device name
+7. Download the file by clicking on the `Ok` button
 
+![Easyroam home page, the Linux button is circled in red](images/easyroam-home-page.png)
 
 ### Option 1: Automatic NetworkManger Setup
 > [!WARNING]
