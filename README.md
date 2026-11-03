@@ -21,6 +21,9 @@ Currently, the direct setup has been tested only on Fedora with NetworkManager, 
 
 You can either use `easyroam.sh` to extract the certificate files and set up your network manually, or, if you have NetworkManager installed, use `easyroam_nm.sh` to set up the network automatically.
 
+> [!NOTE]
+> These scripts are also useful on Debian/Ubuntu-based distributions where the official easyroam app is available but does not work as expected (e.g. on Pop!_OS 24.04, the Snap version failed). They do not depend on the app.
+
 ### Obtaining your Certificate
 
 1. Open https://www.easyroam.de
