@@ -98,6 +98,7 @@ done
 # LOGIC
 echo
 echo -n -e "Create output directory... "
+umask 077  # certificate and private key must only be readable by the owner
 if [[ ! -d "$outputdir" ]]; then
     mkdir -p "$outputdir" || { echo "Failed to create directory."; exit 1; }
 fi
@@ -150,6 +151,7 @@ nmcli connection show easyroam >/dev/null 2>&1 && nmcli connection delete easyro
 echo -n "Create new configurations... "
 nmcli connection add type wifi ifname "$interface" con-name easyroam ssid eduroam \
     wifi-sec.key-mgmt wpa-eap 802-1x.eap tls 802-1x.identity "$cn" \
+    802-1x.altsubject-matches "DNS:easyroam.eduroam.de" \
     802-1x.client-cert "$outputdir/easyroam_client_cert.pem" \
     802-1x.ca-cert "$outputdir/easyroam_root_ca.pem" \
     802-1x.private-key "$outputdir/easyroam_client_key.pem" \
@@ -162,3 +164,4 @@ fi
 echo -e "\nSUCCESS: You should now be able to connect to eduroam."
 
 echo -e "\nIdentity: $cn"
+echo "Certificate valid until: $(openssl x509 -noout -enddate -in "$outputdir/easyroam_client_cert.pem" | cut -d= -f2)"
