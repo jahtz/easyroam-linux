@@ -58,10 +58,28 @@ check_dependency "openssl"
 
 # PROMTS
 echo
-echo -e "Select PKCS12 (.p12) bundle file:"
+# Suggest the newest .p12 file in the script directory, the current directory or ~/Downloads
+scriptdir="$( cd "$( dirname "$0" )" && pwd )"
+p12default=$(ls -t "$scriptdir"/*.p12 "$PWD"/*.p12 "$HOME"/Downloads/*.p12 2>/dev/null | head -n 1)
+if [[ -n "$p12default" ]]; then
+    echo -e "Select PKCS12 (.p12) bundle file [Default: $p12default]:"
+else
+    echo -e "Select PKCS12 (.p12) bundle file:"
+fi
 read -e p12file
+p12file="${p12file:-$p12default}"
+p12file="${p12file/#\~/$HOME}"  # expand a leading ~ (e.g. ~/Downloads/file.p12)
 if [[ -z "$p12file" || ! -f "$p12file" || "${p12file##*.}" != "p12" ]]; then
     echo "Invalid PKCS12 file path!"
+    echo "You can download your certificate at https://www.easyroam.de (see README)."
+    if command -v xdg-open &> /dev/null; then
+        read -n 1 -r -p "Open https://www.easyroam.de in your browser now? [y/N] " openportal
+        echo
+        if [[ "$openportal" =~ ^[Yy]$ ]]; then
+            xdg-open "https://www.easyroam.de" &> /dev/null &
+        fi
+    fi
+    echo "Run this script again after downloading the .p12 file."
     exit 1
 fi
 

@@ -53,6 +53,9 @@ You can either user `easyroam.sh` to extract the certificate files and set up yo
     ```
 
 > [!TIP]
+> If the .p12 file is in the same directory as the script, the current directory or _~/Downloads_, the newest one is suggested automatically – just press Enter. If no file is found, the script points you to https://www.easyroam.de.
+
+> [!TIP]
 > To remove the generated configuration, delete the file _/etc/NetworkManager/system-connections/easyroam.nmconnection_ <br>or run: `nmcli connection delete easyroam` 
 
 
